@@ -52,7 +52,7 @@ jobs:
           helm repo index . --url https://chartmuseum.khiemnd.dev/
           done
       - name: Setup S3 credentials assume role
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::359672545978:role/github-actions-role
           aws-region: ap-southeast-1
