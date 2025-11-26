@@ -19,15 +19,19 @@ jobs:
           version: v3.12.0
       - name: Lint Helm Chart
         run: |
-          for DIR in "*/" ; do
-            if [ "$DIR" = ".github"]
-            then
+          for DIR in */ ; do
+            if [ "$DIR" = ".github/" ]; then
               echo "Skipping .github directory"
               continue
             fi
-            echo "Linting Helm chart in directory: $DIR"
-            helm dependency update "$DIR"
-            helm lint "$DIR"
+
+            if [ -f "$DIR/Chart.yaml" ]; then
+              echo "Linting Helm chart in directory: $DIR"
+              helm dependency update "$DIR"
+              helm lint "$DIR"
+            else
+              echo "Skipping $DIR (no Chart.yaml)"
+            fi
           done
   sync-chart:
     if: github.event_name == 'push'
