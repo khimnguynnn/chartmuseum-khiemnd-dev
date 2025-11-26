@@ -1,5 +1,9 @@
 name: Auto sync helm chart
 
+permissions:
+  id-token: write
+  contents: read
+
 on:
   push:
     branches: [ main ]
@@ -68,4 +72,5 @@ jobs:
             --content-type "application/gzip" \
             --metadata-directive REPLACE
           done
+          aws cloudfront create-invalidation --distribution-id E2QEXAMPLEC6M6Z --paths "/index.yaml" "/ *.tgz"
 
