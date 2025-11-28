@@ -52,11 +52,13 @@ jobs:
             if [ "$DIR" = ".github" ]; then
               echo "Skipping .github directory"
               continue
+            else
               echo "Packaging Helm chart in directory: $DIR"
+              helm dependency update "$DIR"
               helm package "$DIR"
             fi
+
           helm repo index . --url https://chartmuseum.khiemnd.dev/
-          helm repo package "$DIR"
           done
       - name: Setup S3 credentials assume role
         uses: aws-actions/configure-aws-credentials@v4
