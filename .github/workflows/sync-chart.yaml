@@ -1,9 +1,5 @@
 name: Auto sync helm chart
 
-permissions:
-  id-token: write
-  contents: read
-
 on:
   push:
     branches: [ main ]
@@ -38,6 +34,9 @@ jobs:
             fi
           done
   sync-chart:
+    permissions:
+      id-token: write
+      contents: read
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
@@ -50,8 +49,7 @@ jobs:
       - name: Sync Helm Chart
         run: |
           for DIR in */ ; do
-            if [ "$DIR" = ".github"]
-            then
+            if [ "$DIR" = ".github" ]; then
               echo "Skipping .github directory"
               continue
               echo "Packaging Helm chart in directory: $DIR"
