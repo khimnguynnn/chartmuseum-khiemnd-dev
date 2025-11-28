@@ -73,5 +73,5 @@ jobs:
             --content-type "application/gzip" \
             --metadata-directive REPLACE
           done
-          aws cloudfront create-invalidation --distribution-id E2QEXAMPLEC6M6Z --paths "/index.yaml" "/ *.tgz"
+          aws cloudfront create-invalidation --distribution-id E2HBWOC1NX2JN9 --paths "/index.yaml" "/ *.tgz"
 
