@@ -29,6 +29,7 @@ jobs:
               echo "Linting Helm chart in directory: $DIR"
               helm dependency update "$DIR"
               helm lint "$DIR"
+              helm template "$DIR"
             else
               echo "Skipping $DIR (no Chart.yaml)"
             fi
@@ -73,5 +74,5 @@ jobs:
             --content-type "application/gzip" \
             --metadata-directive REPLACE
           done
-          aws cloudfront create-invalidation --distribution-id E2HBWOC1NX2JN9 --paths "/index.yaml" "/ *.tgz"
+          aws cloudfront create-invalidation --distribution-id E2HBWOC1NX2JN9 --paths "/*"
 
