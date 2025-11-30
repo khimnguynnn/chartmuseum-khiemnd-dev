@@ -78,10 +78,10 @@ spec:
               {{ toYaml . | nindent 12 }}
             {{- end }}
             {{- if.Values.configmap.enabled }}
-            - name: {{ include "application.name" }}-env
+            - name: {{ include "application.name" . }}-env
               valueFrom:
                 configMapKeyRef:
-                  name: {{ include "application.fullname" }}-configmap
+                  name: {{ include "application.fullname" . }}-configmap
             {{- end }}
           {{- end }}
           {{- end }}

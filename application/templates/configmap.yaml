@@ -1,9 +1,10 @@
-{{- if .Values.configmap.enabled  }}
+{{- if .Values.configmap.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ include "application.fullname" . }}-configmap
-{{ with .Values.configmap.data }}
+{{- with .Values.configmap.data }}
 data:
-  {{ toYaml . | nindent 2 }}
+{{ toYaml . | nindent 2 }}
+{{- end }}
 {{- end }}
