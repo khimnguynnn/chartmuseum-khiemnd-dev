@@ -1,4 +1,23 @@
 replicaCount: 1
+
+initContainer:
+  enabled: true
+  image:
+    repository: busybox
+    pullPolicy: IfNotPresent
+    tag: "latest"
+  command: ["sh", "-c", "echo Initializing... && sleep 5"]
+  resources:
+    limits:
+      cpu: 50m
+      memory: 64Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+  env:
+    - name: INIT_ENV
+      value: init_value
+
 image:
   repository: nginx
   pullPolicy: IfNotPresent
@@ -58,6 +77,12 @@ resources:
   requests:
     cpu: 100m
     memory: 128Mi
+
+env:
+  - name: APP_ENV
+    value: production
+  - name: APP_DEBUG
+    value: "false"
 
 livenessProbe:
   httpGet:
