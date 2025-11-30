@@ -4,6 +4,10 @@ Tất cả thay đổi quan trọng của project sẽ được ghi lại trong 
 Format theo chuẩn [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 Version theo [Semantic Versioning](https://semver.org/).
 
+## [0.1.3] - 30-11-2025
+### Added
+- Edit Env có thể sử dụng từ configmap và Env thường.
+
 ## [0.1.2] - 28-11-2025
 ### Added
 - Thêm env cho container.

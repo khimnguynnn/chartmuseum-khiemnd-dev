@@ -18,6 +18,14 @@ initContainer:
     - name: INIT_ENV
       value: init_value
 
+configmap:
+  enabled: true
+  data:
+    APP_ENV: production
+    APP_DEBUG: "false"
+    nginx.conf: |
+      # nginx.conf will be displayed in this.
+
 image:
   repository: nginx
   pullPolicy: IfNotPresent

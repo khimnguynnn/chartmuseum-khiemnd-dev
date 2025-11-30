@@ -71,9 +71,19 @@ spec:
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.env }}
+          {{- if or .Values.env .Values.configmap.enabled }}
           env:
-            {{- toYaml . | nindent 12 }}
+            {{- if .Values.env }}
+            {{- with .Values.env  }}
+              {{ toYaml . | nindent 12 }}
+            {{- end }}
+            {{- if.Values.configmap.enabled }}
+            - name: {{ include "application.name" . }}-env
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "application.fullname" . }}-configmap
+            {{- end }}
+          {{- end }}
           {{- end }}
           {{- if .Values.persistence.enabled }}
           volumeMounts:
